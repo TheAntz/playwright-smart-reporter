@@ -141,7 +141,7 @@ jobs:
       - name: Merge blob reports
         run: |
           cp blob-reports/machine1/*.zip blob-reports/machine2/*.zip blob-reports/merged/
-          npx playwright merge-reports --reporter=./dist/smart-reporter.js blob-reports/merged
+          npx playwright merge-reports --reporter='[["./dist/smart-reporter.js", {"outputFile": "blob-reports/merged/smart-report.html", "historyFile": "blob-reports/merged/test-history.json"}]]' blob-reports/merged
 
       - name: Verify merged report
         run: |
