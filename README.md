@@ -1,10 +1,10 @@
 # playwright-smart-reporter
 
-![Let's Build QA](./images/lets-build-qa-banner.png)
+![Let's Build QA](https://raw.githubusercontent.com/qa-gary-parker/playwright-smart-reporter/master/images/lets-build-qa-banner.png)
 
 An intelligent Playwright HTML reporter with AI-powered failure analysis, flakiness detection, and performance regression alerts.
 
-![Report Overview](./images/report-overview.png)
+![Report Overview](https://raw.githubusercontent.com/qa-gary-parker/playwright-smart-reporter/master/images/report-overview.png)
 
 ## Features
 
@@ -85,7 +85,7 @@ The reporter will automatically analyze failures and provide fix suggestions in 
 
 ### Pass Rate Trend Chart
 
-![Trend Chart](./images/trend-chart-hover.png)
+![Trend Chart](https://raw.githubusercontent.com/qa-gary-parker/playwright-smart-reporter/master/images/trend-chart-hover.png)
 
 Visual stacked bar chart showing test status across runs:
 - **Green** - Passed tests
@@ -113,7 +113,7 @@ Secondary trend charts show:
 
 ### Per-Test History Visualization
 
-![Expanded Test](./images/test-expanded-ai.png)
+![Expanded Test](https://raw.githubusercontent.com/qa-gary-parker/playwright-smart-reporter/master/images/test-expanded-ai.png)
 
 When you expand a test, you'll see:
 - **Pass/Fail Sparkline** - Green/red/gray dots showing the pattern
