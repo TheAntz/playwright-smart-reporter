@@ -60,3 +60,14 @@ export function stripAnsiCodes(str: string): string {
   // Remove ANSI escape sequences (e.g., \x1b[31m, \x1b[0m, etc.)
   return str.replace(/\x1b\[[0-9;]*m/g, '');
 }
+
+/**
+ * Sanitize a string to be used as a safe filename
+ * Replaces path separators and other problematic characters while preserving readability
+ * @param str - String to sanitize
+ * @returns Safe filename string
+ */
+export function sanitizeFilename(str: string): string {
+  // Replace path separators and colons with double underscores for better readability
+  return str.replace(/[\/\\:]/g, '__').replace(/[<>"|?*]/g, '_');
+}

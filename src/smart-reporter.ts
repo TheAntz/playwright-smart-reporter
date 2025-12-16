@@ -57,7 +57,7 @@ import {
 import { generateHtml, type HtmlGeneratorData } from './generators/html-generator';
 import { buildComparison } from './generators/comparison-generator';
 import { SlackNotifier, TeamsNotifier } from './notifiers';
-import { formatDuration, stripAnsiCodes } from './utils';
+import { formatDuration, stripAnsiCodes, sanitizeFilename } from './utils';
 
 // ============================================================================
 // Smart Reporter
@@ -332,7 +332,9 @@ class SmartReporter implements Reporter {
           for (let i = 0; i < result.attachments.traces.length; i++) {
             const tracePath = result.attachments.traces[i];
             if (fs.existsSync(tracePath)) {
-              const traceFileName = `${result.testId}-trace-${i}.zip`;
+              // Sanitize testId to prevent path separator issues
+              const safeTestId = sanitizeFilename(result.testId);
+              const traceFileName = `${safeTestId}-trace-${i}.zip`;
               const destPath = path.join(tracesDir, traceFileName);
               fs.copyFileSync(tracePath, destPath);
               // Update the path to relative for HTML
