@@ -21,6 +21,7 @@ export interface SmartReporterOptions {
   enableComparison?: boolean;
   enableAIRecommendations?: boolean;
   enableTrendsView?: boolean;
+  enableHistoryDrilldown?: boolean; // Default: false (stores per-run snapshots for dot-click drilldown)
 
   // NEW: Thresholds
   stabilityThreshold?: number;     // Default: 70 (warn below this)
@@ -43,6 +44,7 @@ export interface TestHistoryEntry {
   timestamp: string;
   skipped?: boolean;
   retry?: number;  // NEW: Track retry count in history
+  runId?: string;  // NEW: Run identifier for drilldown
 }
 
 export interface RunSummary {
@@ -70,6 +72,27 @@ export interface TestHistory {
     [testId: string]: TestHistoryEntry[];
   };
   summaries?: RunSummary[];
+  runFiles?: Record<string, string>; // runId -> relative JSON snapshot path
+}
+
+export interface TestResultSnapshot {
+  testId: string;
+  title: string;
+  file: string;
+  status: TestResultData['status'];
+  duration: number;
+  retry: number;
+  error?: string;
+  steps: StepData[];
+  aiSuggestion?: string;
+  aiSuggestionHtml?: string;
+  attachments?: AttachmentData;
+}
+
+export interface RunSnapshotFile {
+  runId: string;
+  timestamp: string;
+  tests: Record<string, TestResultSnapshot>;
 }
 
 // NEW: CI Integration
