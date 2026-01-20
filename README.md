@@ -2,134 +2,89 @@
 
 ![Let's Build QA](https://raw.githubusercontent.com/qa-gary-parker/playwright-smart-reporter/master/images/lets-build-qa-banner.png)
 
-An intelligent Playwright HTML reporter with AI-powered failure analysis, flakiness detection, and performance regression alerts.
+An intelligent Playwright HTML reporter with AI-powered failure analysis, flakiness detection, performance regression alerts, and a modern interactive dashboard.
 
-![Report Overview](https://raw.githubusercontent.com/qa-gary-parker/playwright-smart-reporter/master/images/report-overview.png)
-*v0.7.0 dashboard showing: stability score filtering (A-F grades), trend charts, run comparison, attachment gallery, and comprehensive test results*
+![Report Overview](https://raw.githubusercontent.com/qa-gary-parker/playwright-smart-reporter/master/images/report-overview-v1.png)
+*v1.0.0 dashboard featuring: sidebar navigation, suite health grade, attention-based filtering, failure clusters, quick insights, and interactive trend charts*
 
 ## Features
 
+### Core Analysis
 - **AI Failure Analysis** - Get AI-powered suggestions to fix failing tests (Claude/OpenAI)
 - **Flakiness Detection** - Tracks test history to identify unreliable tests
 - **Performance Regression Alerts** - Warns when tests get significantly slower
+- **Stability Scoring** - Composite health metrics (0-100 with letter grades A+ to F)
+- **Failure Clustering** - Group similar failures by error type with error previews
+- **Test Retry Analysis** - Track tests that frequently need retries
+
+### Interactive Dashboard
+- **Sidebar Navigation** - Organized views: Overview, Tests, Trends, Comparison, Gallery
+- **Theme Support** - Light, dark, and system theme modes with persistent preference
+- **Interactive Trend Charts** - Clickable chart bars to navigate to historical runs
+- **Per-Test History** - Click through historical results for individual tests
+- **Quick Insights** - Clickable cards showing slowest test, most flaky test, and test distribution
+- **Attention-Based Filtering** - Visual badges for New Failures, Regressions, and Fixed tests
+
+### Test Details
 - **Pass Rate Trend Chart** - Visual graph showing pass rates across runs
-- **Per-Test History** - Sparklines and duration charts for each test
 - **Step Timing Breakdown** - See which steps are slowest with visual bars
 - **Screenshot Embedding** - Failure screenshots displayed inline
 - **Video Links** - Quick access to test recordings
-- **One-Click Trace Viewing** - Downloads trace and opens trace.playwright.dev
-- **Collapsible File Groups** - Tests organized by file
-- **Search & Filter** - Find tests by name, filter by status
+- **One-Click Trace Viewing** - Opens trace in Playwright's trace viewer
+- **Search & Filter** - Find tests by name, filter by status, health, or grade
+
+### Integration
 - **JSON Export** - Download results for external processing
 - **Slack/Teams Notifications** - Get alerted on failures
 - **CI Integration** - Auto-detects GitHub, GitLab, CircleCI, Jenkins, Azure DevOps
-- ✨ **NEW: Test Retry Analysis** - Track tests that frequently need retries
-- ✨ **NEW: Failure Clustering** - Group similar failures by error type
-- ✨ **NEW: Stability Scoring** - Composite health metrics (0-100 with letter grades)
-- ✨ **NEW: Attachment Gallery** - Grid view of all screenshots, videos, and traces
-- ✨ **NEW: Run Comparison** - Compare current run vs baseline to see what changed
-- ✨ **NEW: Smart Recommendations** - AI-powered actionable insights
-- ✨ **NEW: Trace Viewer Integration** - Open Playwright traces directly from report
-- ✨ **NEW: Merge History CLI** - Combine parallel CI run histories
+- **Merge History CLI** - Combine parallel CI run histories
 
-## New in v0.7.0
+## New in v1.0.0
 
-### UI Improvements
-- **Copy Buttons** - One-click copy for AI suggestions and code blocks
-- **Keyboard Navigation** - Use `j`/`k` to navigate tests, `Enter` to expand/collapse
-- **Collapsible Trends** - Click to expand/collapse the trend charts section
-- **New Test Filter** - Filter to show only first-time tests (no history yet)
+### Full UI Redesign
 
-### Bug Fixes
-- **Pass Rate Consistency** - Fixed inconsistent pass rate calculations across header, charts, and comparisons. All now use `passed / total` formula.
+**Special thanks to [Filip Gajic](https://github.com/Morph93) (@Morph93) for designing and implementing the core UI redesign!**
 
-### Code Quality
-- Major internal code cleanup removing 2,200+ lines of dead code
-- Improved type safety throughout chart generation
-- Added null safety checks in gallery lightbox
+The reporter has been completely redesigned with a modern, professional interface:
+
+- **Sidebar Navigation** - Clean, collapsible sidebar replacing the single-page scroll layout
+- **Multiple Views** - Dedicated views for Overview, Tests, Trends, Comparison, and Gallery
+- **Theme Support** - Choose between light, dark, or system theme with persistent preference
+- **Suite Health Grade** - At-a-glance health indicator combining pass rate, stability, and performance
+
+### Interactive Historical Navigation
+
+- **Clickable Trend Charts** - Click any bar in the trend charts to view that historical run
+- **History Banner** - Shows which historical run you're viewing with "Back to Current" button
+- **Per-Test History Dots** - Click dots to see individual test results from previous runs
+- **Global Historical State** - Navigate between tests while maintaining historical context
+
+### Attention-Based Filtering
+
+- **Visual Badges** - Tests display NEW FAILURE, REGRESSION, or FIXED badges
+- **Filter Chips** - Quick filters for attention-requiring tests
+- **Smart Sorting** - Tests needing attention automatically sorted to top
+
+### Enhanced Failure Clusters
+
+- **Error Previews** - See actual error messages in the cluster summary
+- **Affected Tests** - View which tests are affected by each error type
+- **File Locations** - Quick reference to which spec files contain failures
+
+### Quick Insights
+
+- **Slowest Test** - Identifies your slowest running test
+- **Most Flaky Test** - Highlights the test with highest failure rate
+- **Test Distribution** - Visual breakdown of passed/failed/skipped (clickable to filter)
+- **Pass Rate Trend** - Shows if pass rate is improving or declining
+
+### Accessibility & Polish
+
+- **ARIA Improvements** - Better keyboard navigation and screen reader support
+- **Sidebar Animation** - Smooth collapse/expand with opacity transitions
+- **Refined Styling** - Subtle shadows, colored borders, and improved visual hierarchy
 
 ---
-
-## New in v0.5.0
-
-### Test Retry Analysis
-
-Track tests that require multiple attempts to pass. The report now identifies tests with high retry rates, helping you spot unreliable tests that pass inconsistently.
-
-- Automatically detects tests that passed only after retries
-- Shows retry count for each test
-- Highlights tests that exceed the retry threshold (default: 3)
-- Helps identify flaky tests that might pass/fail randomly
-
-### Failure Clustering
-
-Automatically groups similar failures together by analyzing error messages and stack traces. This makes it easier to identify patterns and common root causes across multiple test failures.
-
-- Groups failures by error type (timeout, assertion, network, etc.)
-- Shows count of similar failures in each cluster
-- Helps prioritize fixes by identifying widespread issues
-- Reduces noise when debugging multiple failures
-
-### Stability Scoring
-
-Comprehensive health metrics that give each test a stability score from 0-100 with letter grades (A+ to F).
-
-- **A+ (95-100)**: Rock solid, consistently passing
-- **A (90-94)**: Very stable with rare failures
-- **B (80-89)**: Generally stable with occasional issues
-- **C (70-79)**: Moderately stable, needs attention
-- **D (60-69)**: Unstable, frequent failures
-- **F (<60)**: Critically unstable, requires immediate attention
-
-Scores are calculated based on:
-- Pass rate over recent runs
-- Retry frequency
-- Performance consistency
-- Failure patterns
-
-### Attachment Gallery
-
-New gallery view displaying all test attachments (screenshots, videos, traces) in an organized grid layout.
-
-- Visual grid of all screenshots from test runs
-- Quick access to videos and trace files
-- Filter by test status or file name
-- Thumbnail previews with click-to-expand
-- Trace Viewer integration - open `.zip` traces directly in Playwright's trace viewer
-
-### Run Comparison
-
-Compare the current test run against a baseline to see exactly what changed.
-
-- Side-by-side comparison of test results
-- Highlights new failures, new passes, and regressions
-- Shows performance changes (faster/slower)
-- Identifies newly added or removed tests
-- Configure baseline using `baselineRunId` option
-
-### Smart Recommendations
-
-AI-powered actionable insights based on your test results. The reporter analyzes patterns and provides specific recommendations:
-
-- Suggests tests to investigate based on failure patterns
-- Identifies performance bottlenecks
-- Recommends retry configuration adjustments
-- Highlights flaky tests that need stabilization
-- Provides priority-ranked action items
-
-### Merge History CLI
-
-New command-line tool for combining test histories from parallel CI runs.
-
-```bash
-# Merge histories from multiple parallel shards
-npx playwright-smart-reporter-merge-history history1.json history2.json -o merged.json
-
-# Use glob patterns for multiple files
-npx playwright-smart-reporter-merge-history 'blob-reports/**/test-history.json' -o test-history.json --max-runs 10
-```
-
-This is essential for maintaining accurate history when running tests in parallel across multiple machines or shards.
 
 ## Installation
 
@@ -153,7 +108,7 @@ export default defineConfig({
       performanceThreshold: 0.2,
       slackWebhook: process.env.SLACK_WEBHOOK_URL,
       teamsWebhook: process.env.TEAMS_WEBHOOK_URL,
-      // v0.5.0 features
+      // Feature flags
       enableRetryAnalysis: true,
       enableFailureClustering: true,
       enableStabilityScore: true,
@@ -161,7 +116,7 @@ export default defineConfig({
       enableComparison: true,
       enableAIRecommendations: true,
       enableTraceViewer: true,
-      enableHistoryDrilldown: false,
+      enableHistoryDrilldown: true,
       stabilityThreshold: 70,
       retryFailureThreshold: 3,
       baselineRunId: 'main-branch-baseline', // optional
@@ -187,7 +142,7 @@ export default defineConfig({
 | `enableComparison` | `true` | Enable run comparison against baseline |
 | `enableAIRecommendations` | `true` | Generate AI-powered recommendations |
 | `enableTraceViewer` | `true` | Enable "View Trace" actions |
-| `enableHistoryDrilldown` | `false` | Store small per-run snapshots so you can click history dots to view historical runs |
+| `enableHistoryDrilldown` | `true` | Store per-run snapshots for historical navigation |
 | `stabilityThreshold` | `70` | Minimum stability score (C grade) to avoid warnings |
 | `retryFailureThreshold` | `3` | Number of retries before flagging as problematic |
 | `baselineRunId` | - | Optional: Run ID to use as baseline for comparisons |
@@ -207,94 +162,103 @@ export OPENAI_API_KEY=your-api-key
 
 The reporter will automatically analyze failures and provide fix suggestions in the report.
 
-## Report Features
+## Report Views
 
-### Summary Dashboard
-- Pass rate ring with percentage
-- Pass/fail/skip counts
-- Flaky test count
-- Slow test count
-- Total duration
+### Overview
 
-### Trend Charts
+The Overview provides a quick summary of your test suite health:
 
-![Trend Charts](https://raw.githubusercontent.com/qa-gary-parker/playwright-smart-reporter/master/images/trend-chart-hover.png)
-*Responsive 2x2 grid layout with interactive tooltips showing exact values on hover*
+- **Pass Rate Ring** - Visual indicator with percentage
+- **Suite Health Grade** - Combined score (A+ to F) based on pass rate, stability, and performance
+- **Stat Cards** - Pass/fail/skip/flaky counts with colored indicators
+- **Attention Required** - Cards highlighting flaky tests and fixed tests
+- **Failure Clusters** - Grouped errors with previews and affected test counts
+- **Quick Insights** - Slowest test, most flaky test, test distribution
 
-Visual charts showing test history across runs:
+### Tests
 
-**Main Trend Chart** (top):
-- **Green** - Passed tests
-- **Red** - Failed tests
-- **Gray** - Skipped tests
-- Hover over any bar to see exact counts
-- Current run highlighted with border
+Browse and filter all tests with powerful filtering options:
 
-**Secondary Charts** (2x2 grid):
-- **Duration** - Suite execution time per run with values on hover
-- **Flaky** - Number of flaky tests detected per run
-- **Slow** - Number of slow tests detected per run
-- **Run Comparison** - Diff against baseline showing changes
+- **Status Filters** - All, Passed, Failed, Skipped
+- **Health Filters** - Flaky, Slow, New
+- **Grade Filters** - Filter by stability grade (A, B, C, D, F)
+- **Attention Filters** - New Failures, Regressions, Fixed
+- **Search** - Find tests by name
 
-### Flakiness Indicators
+Each test card shows:
+- Status indicator and test name
+- Duration and stability grade
+- Flakiness indicator and performance trend
+- History dots (clickable for historical view)
+- Expandable details with steps, errors, screenshots, and AI suggestions
+
+### Trends
+
+Interactive charts showing test suite trends over time:
+
+- **Pass Rate** - Track pass rate improvements or regressions
+- **Duration** - Monitor test suite execution time
+- **Flaky Tests** - See flakiness trends across runs
+- **Slow Tests** - Track performance issues over time
+
+Click any chart bar to view that historical run's data.
+
+### Comparison
+
+Compare current run against a baseline:
+
+- Pass rate change with trend indicator
+- Duration change
+- Test count differences
+- Flaky test count changes
+
+### Gallery
+
+Visual grid of all test attachments:
+
+- Screenshots with thumbnail previews
+- Video recordings
+- Trace files with direct viewer access
+- Filter by test status
+
+## Flakiness Indicators
+
 - 🟢 **Stable** (<10% failure rate)
 - 🟡 **Unstable** (10-30% failure rate)
 - 🔴 **Flaky** (>30% failure rate)
 - ⚪ **New** (no history yet)
 - ⚪ **Skipped** (test was skipped)
 
-### Trace Viewer
+## Stability Grades
 
-The report includes **Download Trace** and **View Trace** actions on failed tests (and in the gallery when enabled).
+- **A+ (95-100)**: Rock solid, consistently passing
+- **A (90-94)**: Very stable with rare failures
+- **B (80-89)**: Generally stable with occasional issues
+- **C (70-79)**: Moderately stable, needs attention
+- **D (60-69)**: Unstable, frequent failures
+- **F (<60)**: Critically unstable, requires immediate attention
 
-`View Trace` uses Playwright's native trace viewer (`npx playwright show-trace ...`) via the helper command below.
+## Performance Trends
 
-To open a specific trace directly in Trace Viewer (starts the server automatically and opens the right URL):
+- ↑ **Regression** - Test is slower than average
+- ↓ **Improved** - Test is faster than average
+- → **Stable** - Test is within normal range
+
+## Trace Viewer
+
+The report includes **Download Trace** and **View Trace** actions on failed tests.
+
+To open a trace directly in Playwright's Trace Viewer:
 
 ```bash
 npx playwright-smart-reporter-view-trace ./traces/<trace>.zip
 ```
 
-### Performance Trends
-- ↑ **Regression** - Test is slower than average
-- ↓ **Improved** - Test is faster than average
-- → **Stable** - Test is within normal range
-
-### Per-Test Details
-
-![Expanded Test](https://raw.githubusercontent.com/qa-gary-parker/playwright-smart-reporter/master/images/test-expanded-ai.png)
-*Expanded failed test showing: run history sparkline, duration trend chart, step timings with SLOWEST badge, clean error display (no ANSI codes), embedded screenshot, and AI-powered suggestions*
-
-When you expand a test, you'll see:
-- **Pass/Fail Sparkline** - Green/red/gray dots showing the pattern across runs
-- **Duration Trend Chart** - Bar chart showing performance over time
-- **Step Timings** - Visual breakdown with slowest step highlighted (SLOWEST badge)
-- **Error Details** - Clean error messages with ANSI escape codes stripped
-- **Screenshot** - Embedded failure screenshot (click to expand to full size)
-- **AI Suggestion** - Contextual fix recommendations from Claude or OpenAI
-- **Retry Information** - Shows which retry attempt passed (if applicable)
-- **Stability Score** - Letter grade (A-F) indicating test health
-- Current run highlighted with distinct styling
-
-### Step Timings
-- Visual bar chart of step durations
-- "SLOWEST" badge on the slowest step
-- Helps identify bottlenecks in your tests
-
-### Additional Features
-- **Screenshot embedding** - Failure screenshots shown inline
-- **Video links** - Quick access to recordings
-- **Trace viewing** - Downloads trace and opens Playwright's trace viewer
-- **Retry badge** - Shows if test passed on retry
-- **Search** - Filter tests by name or file
-- **File groups** - Collapsible groups by file
-- **JSON export** - Download full results
-
 ## CI Integration
 
 ### Persisting History Across Runs
 
-For flakiness detection and performance trends to work in CI, you need to persist `test-history.json` between runs.
+For flakiness detection and performance trends to work in CI, persist `test-history.json` between runs.
 
 #### GitHub Actions
 
@@ -355,8 +319,6 @@ The reporter automatically detects CI environments and enriches history with:
 - **Commit** - Short commit SHA
 - **CI Provider** - GitHub, GitLab, CircleCI, Jenkins, Azure DevOps
 
-This metadata is stored with each run for debugging and audit purposes.
-
 ### Webhook Notifications
 
 Configure Slack or Teams webhooks to receive notifications when tests fail:
@@ -370,16 +332,11 @@ reporter: [
 ]
 ```
 
-Notifications include:
-- Summary of passed/failed tests
-- List of first 5 failed test names
-- Only sent when there are failures
-
 ### Merging Reports from Multiple Machines
 
-When running tests in parallel across multiple machines (sharding), you can merge both the test results and history files.
+When running tests in parallel across multiple machines (sharding), merge both test results and history files.
 
-#### 1. Configure each machine to output blobs and history
+#### 1. Configure each machine
 
 ```typescript
 // playwright.config.ts
@@ -422,8 +379,6 @@ cp blob-reports/machine1/*.zip blob-reports/machine2/*.zip blob-reports/merged/
 npx playwright merge-reports --reporter=playwright-smart-reporter blob-reports/merged
 ```
 
-The merged report will include all tests from all machines with unified history for flakiness detection and trend charts.
-
 ## Development
 
 ```bash
@@ -433,6 +388,9 @@ npm install
 # Build
 npm run build
 
+# Run tests
+npm test
+
 # Run demo tests
 npm run test:demo
 
@@ -440,19 +398,10 @@ npm run test:demo
 open example/smart-report.html
 ```
 
-### Merge History CLI
+## Contributors
 
-When running tests in parallel across multiple machines or CI shards, use the merge history CLI tool to combine test histories:
-
-```bash
-# Merge parallel test histories
-npx playwright-smart-reporter-merge-history history1.json history2.json -o merged.json
-
-# Use with glob patterns
-npx playwright-smart-reporter-merge-history 'blob-reports/**/test-history.json' -o test-history.json --max-runs 10
-```
-
-This ensures your flakiness detection and performance trends work correctly even with parallelized test execution. The merged history maintains all the metadata from individual runs while deduplicating test results.
+- [Gary Parker](https://github.com/qa-gary-parker) - Creator and maintainer
+- [Filip Gajic](https://github.com/Morph93) - v1.0.0 UI redesign
 
 ## License
 
