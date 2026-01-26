@@ -1,6 +1,6 @@
 {
   "name": "playwright-smart-reporter",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "An intelligent Playwright HTML reporter with AI-powered failure analysis, flakiness detection, and performance regression alerts",
   "main": "dist/smart-reporter.js",
   "types": "dist/smart-reporter.d.ts",
@@ -38,6 +38,10 @@
     {
       "name": "Filip Gajic",
       "url": "https://github.com/Morph93"
+    },
+    {
+      "name": "TheAntz",
+      "url": "https://github.com/TheAntz"
     }
   ],
   "license": "MIT",

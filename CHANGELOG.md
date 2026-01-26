@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.4] - 2026-01-26
+
+### Added
+
+- **Google Gemini AI Support** ([#18](https://github.com/qa-gary-parker/playwright-smart-reporter/pull/18))
+  - Added `GEMINI_API_KEY` environment variable for Google Gemini API integration
+  - Uses `gemini-2.5-flash` model for fast, cost-effective failure analysis
+  - Provider priority: Anthropic Claude → OpenAI → Google Gemini
+  - Comprehensive test coverage for AI analyzer (31 new tests)
+  - Thanks to [@TheAntz](https://github.com/TheAntz) for this contribution!
+
 ## [1.0.3] - 2026-01-21
 
 ### Fixed
