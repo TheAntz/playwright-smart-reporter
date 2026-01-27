@@ -31,7 +31,8 @@ An intelligent Playwright HTML reporter with AI-powered failure analysis, flakin
 - **Network Logs** - View API calls with status codes, timing, and payload details
 - **Screenshot Embedding** - Failure screenshots displayed inline
 - **Video Links** - Quick access to test recordings
-- **One-Click Trace Viewing** - Opens trace in Playwright's trace viewer
+- **Inline Trace Viewer** - View traces directly in the dashboard (v1.0.5+)
+- **Custom Attachments** - Display files added via `testInfo.attach()` (v1.0.5+)
 - **Search & Filter** - Find tests by name, filter by status, health, or grade
 
 ### Integration
@@ -86,6 +87,18 @@ The reporter has been completely redesigned with a modern, professional interfac
 - **Refined Styling** - Subtle shadows, colored borders, and improved visual hierarchy
 
 ## Recent Updates
+
+### v1.0.5
+
+- **Fixed Retry Double-Counting** - Test retries no longer inflate counts; uses Playwright's `test.outcome()` ([#17](https://github.com/qa-gary-parker/playwright-smart-reporter/issues/17))
+- **Fixed Expected Failures** - Tests marked with `test.fail()` are now handled correctly ([#16](https://github.com/qa-gary-parker/playwright-smart-reporter/issues/16))
+- **Inline Trace Viewer** - View Playwright traces directly in the dashboard with timeline, actions, network tabs ([#13](https://github.com/qa-gary-parker/playwright-smart-reporter/issues/13))
+- **Custom Attachments** - Display attachments added via `testInfo.attach()` ([#15](https://github.com/qa-gary-parker/playwright-smart-reporter/issues/15))
+- **Improved Tags** - Tags now extracted from `test.tags` property with better display ([#15](https://github.com/qa-gary-parker/playwright-smart-reporter/issues/15))
+
+### v1.0.4
+
+- **Google Gemini AI Support** - Added `GEMINI_API_KEY` for Google Gemini API integration ([#18](https://github.com/qa-gary-parker/playwright-smart-reporter/pull/18))
 
 ### v1.0.3
 
@@ -275,9 +288,23 @@ Visual grid of all test attachments:
 
 ## Trace Viewer
 
-The report includes **Download Trace** and **View Trace** actions on failed tests.
+The report includes **Download Trace** and **View Trace** actions on tests with trace files.
 
-To open a trace directly in Playwright's Trace Viewer:
+### Inline Trace Viewer (v1.0.5+)
+
+Click **View** to open traces directly in the dashboard without any CLI commands. The inline viewer includes:
+
+- **Film Strip** - Visual timeline showing page snapshots throughout the test
+- **Actions Panel** - Step-by-step view of all Playwright actions with timings
+- **Before/After Screenshots** - See the page state before and after each action
+- **Network Tab** - All network requests with waterfall visualization
+- **Console Tab** - Browser console messages
+- **Errors Tab** - Test failures and exceptions
+- **Attachments Tab** - All test attachments
+
+### CLI Trace Viewer
+
+Alternatively, open traces via command line:
 
 ```bash
 npx playwright-smart-reporter-view-trace ./traces/<trace>.zip
